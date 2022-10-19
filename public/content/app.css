@@ -1,0 +1,102 @@
+/* 
+COMP229-F2022-A2
+Ouzin von Wahl
+301229915
+October 19, 2022
+*/
+
+.title {
+    color: #86C232;
+    margin: 30px 0;
+    text-align: center;
+}
+
+.highlight{
+    color: #86C232;
+    font-weight: bold;
+}
+
+.text-center{
+    padding: 0 5%;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    color: #61892F;
+    transition: .3s ease-in-out;
+}
+
+.lead{
+    font-size: 1.7em;
+}
+
+.col{
+    margin: 28px 0;
+}
+
+#copyright{
+    color: #fff;
+}
+
+.thin-width{
+    margin: 0 20%;
+}
+
+#submitBtn{
+    background-color: #ffffff;
+    color: #86C232;
+    font-weight: bold;
+    padding: 5px 18px;
+    border: 1px solid #c4c4c4;
+    border-radius: 2px 2px 2px;
+    transition: .4s ease;
+}
+#submitBtn:hover{
+    color: #61892F;
+    border: 1px solid #61892F;
+}
+
+/* 
+Fade in animation from:
+https://stackoverflow.com/questions/11679567/using-css-for-a-fade-in-effect-on-page-load */
+.homepage-elements{
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; /* Firefox */
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+    -o-animation: fadein 2s; /* Opera */
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
