@@ -14,6 +14,11 @@ import path, {dirname} from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+// Auth Step 1 - import modules
+import passport from 'passport';
+import passportLocal from 'passport-local';
+import flash from 'connect-flash';
+
 // Auth Step 2 - define our auth strategy
 let localStrategy = passportLocal.Strategy;
 
@@ -28,6 +33,8 @@ import { MongoURI, Secret } from "../config/config.js";
 
 // Import Router
 import indexRouter from './routes/index.route.server.js';
+import authRouter from './routes/auth.route.server.js';
+import contactRouter from './routes/contacts.route.server.js';
 
 // instantiate app-server
 const app = express();
@@ -49,11 +56,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
-app.use(session({
-    secret: Secret,
-    saveUninitialized: false,
-    resave: false
-}));
 
 // Auth Step 4 - Setup Express Session
 app.use(session({
@@ -78,5 +80,7 @@ passport.deserializeUser(User.deserializeUser());
 
 // Use Routes
 app.use('/', indexRouter);
+app.use('/', authRouter);
+app.use('/', contactRouter);
 
 export default app;
