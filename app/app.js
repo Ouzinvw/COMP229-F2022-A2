@@ -14,14 +14,31 @@ import path, {dirname} from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+// Auth Step 2 - define our auth strategy
+let localStrategy = passportLocal.Strategy;
+
+// Auth Step 3 - import the user model
+import User from './models/user.js';
+
+// Import Mongoose Module
+import mongoose from 'mongoose';
+
 // Configuration Module
-import { Secret } from "../config/config.js";
+import { MongoURI, Secret } from "../config/config.js";
 
 // Import Router
 import indexRouter from './routes/index.route.server.js';
 
 // instantiate app-server
 const app = express();
+
+// Complete the DB Configuration
+mongoose.connect(MongoURI);
+const db = mongoose.connection;
+
+//Listen for connection success or error
+db.on('open', () => console.log("Connected to MongoDB"));
+db.on('error', () => console.log("Mongo Connection Error"));
 
 // setup ViewEngine EJS
 app.set('views', path.join(__dirname,'/views'));
@@ -37,6 +54,27 @@ app.use(session({
     saveUninitialized: false,
     resave: false
 }));
+
+// Auth Step 4 - Setup Express Session
+app.use(session({
+    secret: Secret,
+    saveUninitialized: false, 
+    resave: false
+}));
+
+// Auth Step5 - Setup Flash
+app.use(flash());
+
+// Auth Step 6 - Initialize Passport and Session
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Auth Step 7 - Implement the Auth Strategy
+passport.use(User.createStrategy());
+
+// Auth Step 8 - Setup serialization and deserialization
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // Use Routes
 app.use('/', indexRouter);
