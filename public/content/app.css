@@ -59,6 +59,17 @@ a:hover{
     border: 1px solid #61892F;
 }
 
+.btn-success{
+    background-color: #86C232;
+    border: 2px solid;
+}
+.btn-success:hover{
+    background-color: #61892F;
+}
+
+.fa-user, .fa-lock{
+    padding: 10px;
+}
 /* 
 Fade in animation from:
 https://stackoverflow.com/questions/11679567/using-css-for-a-fade-in-effect-on-page-load */
